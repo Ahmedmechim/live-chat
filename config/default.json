@@ -1,0 +1,4 @@
+{
+    "db":"mongodb+srv://ahmed_mechim:00000@cluster0.u50la.mongodb.net/liveChatDb?retryWrites=true&w=majority",
+    "secret":"hi"
+}
