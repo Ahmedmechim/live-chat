@@ -13,9 +13,11 @@ exports.signUp = async (req, res) => {
     }
     try {
       let newUser = new User({ userName, email, password, role });
-      let salt = await bc.genSalt(10);
+      if(password){
+        let salt = await bc.genSalt(10);
       let hash = await bc.hashSync(password, salt);
       newUser.password = hash;
+      }
       await newUser.save();
       let payload = {
         id: newUser._id,
