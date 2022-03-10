@@ -30,3 +30,13 @@ exports.creatConversation = async (req, res) => {
     res.status(500).json({ errors: error.message });
   }
 };
+
+// get a conversation
+exports.getOneConversation = async (req,res)=>{
+  try {
+    let aConversation = await Conversation.find({members: { $in: [req.params.userId] },});
+    res.send(aConversation);
+  } catch (error) {
+    res.status(500).json({ errors: error.message });
+  }
+}

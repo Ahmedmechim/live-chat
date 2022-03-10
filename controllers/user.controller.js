@@ -38,9 +38,11 @@ exports.login=async(req,res)=>{
         if(!thisUser){
             res.status(400).json({msg:"email or password incorrect"})
         }
-        let isMatch= await bc.compare(password,thisUser.password)
-        if(!isMatch){
-            res.status(400).json({msg:"email or password incorrect"})
+        if(thisUser.password){
+          let isMatch= await bc.compare(password,thisUser.password)
+          if(!isMatch){
+              res.status(400).json({msg:"email or password incorrect"})
+          }
         }
         let payload={
             id:thisUser._id,
