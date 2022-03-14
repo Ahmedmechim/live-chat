@@ -1,18 +1,25 @@
 import { TextField } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import Button from '@material-ui/core/Button';
-
+import { useDispatch, useSelector } from "react-redux";
+import { userSignUp } from "../redux/action";
 
 const Discussion = () => {
   const { user } = useSelector((state) => state);
   const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
 
+  let handelSubmit=(e)=>{
+    e.preventDefault();
+    dispatch(userSignUp({email}))
+  }
   return (
     <div>
       {!user ? (
-        <form className="discussionArea">
-        <p className="mailDiscreption">Veuillez laisser votre adresse e-mail au cas où nous aurions besoin de vous contacter par e-mail :</p>
+        <form className="discussionArea" onSubmit={handelSubmit}>
+          <p className="mailDiscreption">
+            Veuillez laisser votre adresse e-mail au cas où nous aurions besoin
+            de vous contacter par e-mail:
+          </p>
           <TextField
             required
             id="standard-required"
@@ -20,9 +27,9 @@ const Discussion = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Button variant="contained" color="primary" disableElevation>
-      Envoyer
-    </Button>
+         <button className="btnSend"  type="submit">
+           envoyer
+         </button>
         </form>
       ) : (
         <div>t3ada</div>

@@ -1,17 +1,17 @@
-
+import {SIGNUP} from "./actionTypes";
 
 let init ={
  user:null
 }
  
-const listeReducer =(state=init,{type,payload})=>{
+const reducer =(state=init,{type,payload})=>{
     switch (type) {
-      
+        case SIGNUP:
+            return state
     
         default:
-        
             return state
     }
 
 }
-export default listeReducer
+export default reducer
