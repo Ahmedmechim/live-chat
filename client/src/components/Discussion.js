@@ -1,7 +1,8 @@
 import { TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userSignUp } from "../redux/action";
+import { connectInter } from "../redux/action";
+import MessagesList from "./MessagesList";
 
 const Discussion = () => {
   const { user } = useSelector((state) => state);
@@ -10,10 +11,10 @@ const Discussion = () => {
 
   let handelSubmit=(e)=>{
     e.preventDefault();
-    dispatch(userSignUp({email}))
+    dispatch(connectInter({email}))
   }
   return (
-    <div>
+    <div className="discussionArea">
       {!user ? (
         <form className="discussionArea" onSubmit={handelSubmit}>
           <p className="mailDiscreption">
@@ -32,7 +33,7 @@ const Discussion = () => {
          </button>
         </form>
       ) : (
-        <div>t3ada</div>
+        <MessagesList/>
       )}
     </div>
   );

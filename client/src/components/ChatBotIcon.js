@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import MessageIcon from "@mui/icons-material/Message";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import GifIcon from "@mui/icons-material/Gif";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
 import Discussion from "./Discussion";
+import Texting from "./Texting";
+import ChatHead from "./ChatHead";
 
 const ChatBotIcon = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,28 +14,19 @@ const ChatBotIcon = () => {
     if (isOpen === false) {
       setIsOpen(true);
     }
+    let box = document.querySelector(".discussionArea");
+    box.scrollTop = box.scrollHeight;
   };
+
   return (
     <div>
       <section
         className="chatBoxArea"
         style={isOpen ? { display: "block" } : { display: "none" }}
       >
-        <div className="header"></div>
-        <div className="discussionArea">
+        <ChatHead />
         <Discussion />
-        </div>
-        <div className="texting">
-          <textarea
-            className="textMessage"
-            placeholder="write a message"
-          ></textarea>
-          <div className="icons">
-            <GifIcon fontSize="large" />
-            <EmojiEmotionsIcon />
-            <AttachFileIcon className="jointFile" />
-          </div>
-        </div>
+        <Texting />
       </section>
       <button className="chatBot" onClick={handelChange}>
         {isOpen ? <KeyboardArrowDownIcon fontSize="large" /> : <MessageIcon />}

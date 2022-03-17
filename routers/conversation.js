@@ -4,7 +4,7 @@ const { getConversations, creatConversation, getOneConversation } = require('../
 let router=express.Router()
 
 router.get('/getConversations',getConversations)
-router.post('/createConversation',creatConversation)
+router.post('/createConversation/:id',creatConversation)
 router.get('/getOneConversation/:userId',getOneConversation)
 
 module.exports=router

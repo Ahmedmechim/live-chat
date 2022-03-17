@@ -24,11 +24,10 @@ exports.sendMessage=async(req,res)=>{
     let senderId=user.id
     let conversationId=req.params.conversationId
     try {
-        let {text}=req.body
         let newMessage = new Message({
             conversationId,
             senderId,
-            text
+            ...req.body,
             });
     newMessage.save();
     res.send(newMessage);
