@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import SendIcon from "@mui/icons-material/Send";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee, } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getMessages, sendMessage } from "../redux/action";
-import { color } from "@mui/system";
+import {  createConversation, sendMessage } from "../redux/action";
 
 const Texting = () => {
-  const { conversation } = useSelector((state) => state);
+  const { user, conversation, messages } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
   const [text, setText] = useState("");
   const handelSend = (e) => {
-    e.preventDefault();
-    dispatch(sendMessage(conversation._id, { text }));
-    setText("");
+    if (messages){
+      
+      e.preventDefault();
+      dispatch(sendMessage(conversation._id, { text }));
+      setText("");
+    }else{
+      e.preventDefault();
+      dispatch(createConversation(user._id, { text }));
+      setText("");
+    }
   };
   return (
     <div className="texting">

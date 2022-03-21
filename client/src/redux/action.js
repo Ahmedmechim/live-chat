@@ -119,7 +119,7 @@ export const getDiscussion = (userId) => async (dispatch) => {
   }
 };
 
-export const createConversation = (userId) => async (dispatch) => {
+export const createConversation = (userId,text) => async (dispatch) => {
   dispatch({
     type: CREATE_CONVERSATION,
   });
@@ -129,7 +129,7 @@ export const createConversation = (userId) => async (dispatch) => {
       type: CREATE_CONVERSATION_SUCCESS,
       payload: res.data,
     });
-    console.log(res.data)
+    dispatch(sendMessage(res.data._id,text))
   } catch (error) {
     dispatch({
       type: CREATE_CONVERSATION_FAIL,
