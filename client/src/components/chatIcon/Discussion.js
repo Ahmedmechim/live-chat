@@ -1,8 +1,9 @@
 import { TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
+import "./Discussion.style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { connectInter } from "../redux/action";
-import MessagesList from "./MessagesList";
+import { connectInter } from "../../redux/action";
+import MessagesList from "../messages/MessagesList";
 
 const Discussion = () => {
   const { user } = useSelector((state) => state);

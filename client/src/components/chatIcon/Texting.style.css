@@ -1,0 +1,23 @@
+.texting {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+}
+.textMessage {
+  resize: none;
+  margin-left: 20px;
+  border: none;
+  width: 180px;
+}
+.icons {
+  display: flex;
+  align-items: center;
+}
+.icons > * {
+  cursor: pointer;
+  size: 80%;
+}

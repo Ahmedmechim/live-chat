@@ -1,0 +1,28 @@
+.discussionArea {
+  height: 360px;
+  position: relative;
+  overflow: auto;
+}
+.mailDiscreption {
+  margin: 20px;
+  font-size: 18px;
+
+  font-weight: 400;
+
+  line-height: 28.8px;
+
+  color: rgb(8, 15, 26);
+}
+.btnSend {
+  background: linear-gradient(to right, rgb(42, 39, 218), rgb(0, 204, 255));
+  color: white;
+  width: 223px;
+  height: auto;
+  border: none;
+  border-radius: 2px;
+  margin: 20px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28.8px;
+  cursor: pointer;
+}

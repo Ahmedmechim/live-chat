@@ -1,4 +1,5 @@
 import React from 'react'
+import "./ChatHead.style.css";
 import { useSelector } from 'react-redux';
 
 const ChatHead = () => {

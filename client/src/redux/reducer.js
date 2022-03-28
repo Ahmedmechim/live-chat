@@ -11,6 +11,9 @@ import {
   GET_PROFIL,
   GET_PROFIL_FAIL,
   GET_PROFIL_SUCCESS,
+  LOGIN,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
 } from "./actionTypes";
 
 let init = {
@@ -29,11 +32,13 @@ const reducer = (state = init, { type, payload }) => {
     case GET_PROFIL:
     case GET_CONVERSATION:
     case GET_MESSAGES:
+    case LOGIN:
       return state;
     case CONNECT_FAIL:
     case GET_PROFIL_FAIL:
     case GET_CONVERSATION_FAIL:
     case GET_MESSAGES_FAIL:
+    case LOGIN_FAIL:
       return {
         ...state,
         errors: payload,
@@ -44,6 +49,12 @@ const reducer = (state = init, { type, payload }) => {
         user: payload.aUser,
         errors: null,
         token: payload.token,
+      };
+    case LOGIN_SUCCESS:
+      return {
+  ...state, 
+  user:payload.thisUser,
+  token:payload.token
       };
     case GET_PROFIL_SUCCESS:
       return {

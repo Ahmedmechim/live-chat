@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import "./Texting.style.css";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import SendIcon from "@mui/icons-material/Send";
 import { useDispatch, useSelector } from "react-redux";
-import {  createConversation, sendMessage } from "../redux/action";
+import { createConversation, sendMessage } from "../../redux/action";
 
 const Texting = () => {
   const { user, conversation, messages } = useSelector((state) => state);

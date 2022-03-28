@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import "./MessagesList.style.css";
 import { useDispatch, useSelector } from "react-redux";
-import {   getDiscussion,  getProfil } from "../redux/action";
 import Message from "./Message";
+import { getDiscussion, getProfil } from "../../redux/action";
 
 const MessagesList = () => {
   const { user,messages } = useSelector((state) => state);

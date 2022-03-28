@@ -1,4 +1,6 @@
 import React from "react";
+import "./Message.style.css";
+
 import { useSelector } from "react-redux";
 
 const Message = ({ msg }) => {

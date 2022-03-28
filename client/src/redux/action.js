@@ -17,8 +17,29 @@ import {
   SEND_MESSAGE,
   SEND_MESSAGE_FAIL,
   SEND_MESSAGE_SUCCESS,
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
 } from "./actionTypes";
 import axios from "axios";
+
+export const userLogin = (user) => async (dispatch) => {
+  dispatch({ type: LOGIN });
+  try {
+    let res = await axios.post("/user/login", user);
+    localStorage.setItem("token", res.data.token);
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+    console.log(res.data)
+  } catch (error) {
+    dispatch({
+      type: LOGIN_FAIL,
+      payload: error.response.data,
+    });
+  }
+};
 
 export const connectInter = (interUser) => async (dispatch) => {
   dispatch({ type: CONNECT });

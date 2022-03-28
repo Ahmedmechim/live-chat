@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import "./chatBotIcon.style.css";
 import MessageIcon from "@mui/icons-material/Message";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ChatHead from "./ChatHead";
 import Discussion from "./Discussion";
 import Texting from "./Texting";
-import ChatHead from "./ChatHead";
+
 
 const ChatBotIcon = () => {
   const [isOpen, setIsOpen] = useState(false);
