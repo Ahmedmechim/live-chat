@@ -15,6 +15,7 @@ function App() {
           <Route exact path="/" element={<ChatBotIcon />} />
           <Route exact path="/admin" element={<AdminPage />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/:id" element={<AdminPage />} />
         </Routes>
       </Router>
     </div>

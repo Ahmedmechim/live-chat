@@ -19,7 +19,6 @@
     text-align: start;
     margin: 5px 0px 5px 0px;
     min-height: 25px;
-  
   }
   .picSender{
     display: none;
@@ -33,7 +32,7 @@
   }
   
   .msgSender{
-    display: flex;
+  display: flex;
   align-items: center;
   justify-content: end;
   margin-right: 5px;

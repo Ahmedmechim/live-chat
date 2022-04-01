@@ -20,6 +20,10 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  GET_ALL_CONVERSATIONS,
+  GET_ALL_CONVERSATIONS_FAIL,
+  GET_ALL_CONVERSATIONS_SUCCESS,
+  ADD_MESSAGE,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -32,7 +36,7 @@ export const userLogin = (user) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    console.log(res.data)
+    console.log(res.data);
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
@@ -82,19 +86,19 @@ export const getProfil = () => async (dispatch) => {
   }
 };
 
-export const getconversation = (userId) => async (dispatch) => {
+export const getAllConversations = (userId) => async (dispatch) => {
   dispatch({
-    type: GET_CONVERSATION,
+    type: GET_ALL_CONVERSATIONS,
   });
   try {
-    let res = await axios.get(`/conversation/getOneConversation/${userId}`);
+    let res = await axios.get(`/conversation/getConversations`);
     dispatch({
-      type: GET_CONVERSATION_SUCCESS,
+      type: GET_ALL_CONVERSATIONS_SUCCESS,
       payload: res.data,
     });
   } catch (error) {
     dispatch({
-      type: GET_CONVERSATION_FAIL,
+      type: GET_ALL_CONVERSATIONS_FAIL,
       payload: error.response.data,
     });
   }
@@ -104,13 +108,13 @@ export const getMessages = (conversationId) => async (dispatch) => {
   dispatch({
     type: GET_MESSAGES,
   });
+  console.log(conversationId);
   try {
     let res = await axios.get(`message/getMessages/${conversationId}`);
     dispatch({
       type: GET_MESSAGES_SUCCESS,
       payload: res.data,
-    }
-    );
+    });
     console.log("messagess", res.data);
   } catch (error) {
     dispatch({
@@ -131,7 +135,7 @@ export const getDiscussion = (userId) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(getMessages(res.data._id));
-    console.log(res.data)
+    console.log(res.data);
   } catch (error) {
     dispatch({
       type: GET_CONVERSATION_FAIL,
@@ -140,7 +144,7 @@ export const getDiscussion = (userId) => async (dispatch) => {
   }
 };
 
-export const createConversation = (userId,text) => async (dispatch) => {
+export const createConversation = (userId, text) => async (dispatch) => {
   dispatch({
     type: CREATE_CONVERSATION,
   });
@@ -150,7 +154,7 @@ export const createConversation = (userId,text) => async (dispatch) => {
       type: CREATE_CONVERSATION_SUCCESS,
       payload: res.data,
     });
-    dispatch(sendMessage(res.data._id,text))
+    dispatch(sendMessage(res.data._id, text));
   } catch (error) {
     dispatch({
       type: CREATE_CONVERSATION_FAIL,
@@ -159,28 +163,35 @@ export const createConversation = (userId,text) => async (dispatch) => {
   }
 };
 
-export const sendMessage = (convId,text)=>async(dispatch)=>{
+export const sendMessage = (convId, text) => async (dispatch) => {
   dispatch({
     type: SEND_MESSAGE,
-  })
+  });
   try {
     let token = localStorage.getItem("token");
-  let config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-    let res = await axios.post(`/message/sendMessage/${convId}`,text,config);
+    let config = {
+      headers: {
+        Authorization: token,
+      },
+    };
+    let res = await axios.post(`/message/sendMessage/${convId}`, text, config);
     dispatch({
       type: SEND_MESSAGE_SUCCESS,
       payload: res.data,
     });
-dispatch(getMessages(convId))
+    dispatch(getMessages(convId));
   } catch (error) {
     dispatch({
       type: SEND_MESSAGE_FAIL,
       payload: error.response.data,
     });
   }
-}
+};
 
+export const addMessage = (res) => {
+  return {
+    type: ADD_MESSAGE,
+    payload: res,
+  };
+  
+};

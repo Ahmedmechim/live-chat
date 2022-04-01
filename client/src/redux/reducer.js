@@ -1,7 +1,11 @@
 import {
+  ADD_MESSAGE,
   CONNECT,
   CONNECT_FAIL,
   CONNECT_SUCCESS,
+  GET_ALL_CONVERSATIONS,
+  GET_ALL_CONVERSATIONS_FAIL,
+  GET_ALL_CONVERSATIONS_SUCCESS,
   GET_CONVERSATION,
   GET_CONVERSATION_FAIL,
   GET_CONVERSATION_SUCCESS,
@@ -20,6 +24,7 @@ let init = {
   user: null,
   errors: null,
   isAuth: false,
+  allConversations:null,
   conversation: null,
   messages:null,
   pic:"https://cdn-icons-png.flaticon.com/512/3447/3447687.png",
@@ -33,12 +38,14 @@ const reducer = (state = init, { type, payload }) => {
     case GET_CONVERSATION:
     case GET_MESSAGES:
     case LOGIN:
+    case GET_ALL_CONVERSATIONS:
       return state;
     case CONNECT_FAIL:
     case GET_PROFIL_FAIL:
     case GET_CONVERSATION_FAIL:
     case GET_MESSAGES_FAIL:
     case LOGIN_FAIL:
+    case GET_ALL_CONVERSATIONS_FAIL:
       return {
         ...state,
         errors: payload,
@@ -71,6 +78,18 @@ const reducer = (state = init, { type, payload }) => {
         ...state,
         messages: payload,
       };
+    case ADD_MESSAGE:
+      return {
+        ...state,
+       messages:[...state.messages,payload]
+      };
+    case GET_ALL_CONVERSATIONS_SUCCESS:
+      return {
+        ...state,
+        allConversations: payload,
+      };
+
+
     default:
       return state;
   }
