@@ -43,7 +43,7 @@ const MessagesList = () => {
   useEffect(() => {
     socket.current.emit("addUser", user._id);
     socket.current.on("getUsers", (users) => {
-      console.log("users", users);
+      // console.log("users", users);
     });
   }, [user]);
 

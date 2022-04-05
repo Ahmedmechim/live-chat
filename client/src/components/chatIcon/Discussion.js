@@ -17,7 +17,7 @@ const Discussion = () => {
   return (
     <div className="discussionArea">
       {!user ? (
-        <form className="discussionArea" onSubmit={handelSubmit}>
+        <form onSubmit={handelSubmit}>
           <p className="mailDiscreption">
             Veuillez laisser votre adresse e-mail au cas où nous aurions besoin
             de vous contacter par e-mail:

@@ -24,6 +24,9 @@ import {
   GET_ALL_CONVERSATIONS_FAIL,
   GET_ALL_CONVERSATIONS_SUCCESS,
   ADD_MESSAGE,
+  GET_USERS,
+  GET_USERS_SUCCESS,
+  GET_USERS_FAIL,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -108,14 +111,14 @@ export const getMessages = (conversationId) => async (dispatch) => {
   dispatch({
     type: GET_MESSAGES,
   });
-  console.log(conversationId);
+  // console.log(conversationId);
   try {
     let res = await axios.get(`message/getMessages/${conversationId}`);
     dispatch({
       type: GET_MESSAGES_SUCCESS,
       payload: res.data,
     });
-    console.log("messagess", res.data);
+    // console.log("messagess", res.data);
   } catch (error) {
     dispatch({
       type: GET_MESSAGES_FAIL,
@@ -193,5 +196,28 @@ export const addMessage = (res) => {
     type: ADD_MESSAGE,
     payload: res,
   };
-  
+};
+
+export const getUsers = () => async (dispatch) => {
+  dispatch({
+    type: GET_USERS,
+  });
+  let token = localStorage.getItem("token");
+  let config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  try {
+    let res = await axios.get(`/user/getUsers`, config);
+    dispatch({
+      type: GET_USERS_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_USERS_FAIL,
+      payload: error.response.data,
+    });
+  }
 };

@@ -19,14 +19,13 @@ const Texting = () => {
   if(conversation){
     receiverId=conversation.members.find(
       (member) => member !== user._id)  
-  }else{
-   
+  }else if(allConversations){
     receiverId=allConversations.find((conversation)=>conversation._id===params.id).members.find(
       (member) => member !== user._id) 
+  }else{
+    receiverId = null
   }
   
-    console.log(receiverId)
-
   const [text, setText] = useState("");
 
   const socket= useRef();

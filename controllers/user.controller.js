@@ -97,7 +97,17 @@ exports.createInterUser = async (req, res) => {
   }
 };
 
-// get a user
+// get the user
 exports.getUser = async (req, res) => {
   res.send(req.user);
 };
+
+// get all users
+exports.getUsers = async (req,res)=>{
+try {
+  let Users= await User.find()
+  res.send(Users)
+} catch (error) {
+  res.status(500).json({ error: error.message });
+}
+}

@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllConversations } from "../../redux/action";
+import React from "react";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Conversations = () => {
-  const { allConversations } = useSelector((state) => state);
- 
+  const { allConversations, users } = useSelector((state) => state);
+
+
+
   return (
     <div>
       {allConversations.map((conv, i) => (
         <Link to={`/${conv._id}`}>
-          <p>{conv._id}</p>
+          <p>{users.find(user=>user._id==conv.members[1]).email}</p>
         </Link>
       ))}
     </div>

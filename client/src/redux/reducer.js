@@ -15,6 +15,9 @@ import {
   GET_PROFIL,
   GET_PROFIL_FAIL,
   GET_PROFIL_SUCCESS,
+  GET_USERS,
+  GET_USERS_FAIL,
+  GET_USERS_SUCCESS,
   LOGIN,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
@@ -22,6 +25,7 @@ import {
 
 let init = {
   user: null,
+  users:null,
   errors: null,
   isAuth: false,
   allConversations:null,
@@ -39,6 +43,7 @@ const reducer = (state = init, { type, payload }) => {
     case GET_MESSAGES:
     case LOGIN:
     case GET_ALL_CONVERSATIONS:
+    case GET_USERS:
       return state;
     case CONNECT_FAIL:
     case GET_PROFIL_FAIL:
@@ -46,6 +51,7 @@ const reducer = (state = init, { type, payload }) => {
     case GET_MESSAGES_FAIL:
     case LOGIN_FAIL:
     case GET_ALL_CONVERSATIONS_FAIL:
+    case GET_USERS_FAIL:
       return {
         ...state,
         errors: payload,
@@ -87,6 +93,11 @@ const reducer = (state = init, { type, payload }) => {
       return {
         ...state,
         allConversations: payload,
+      };
+    case GET_USERS_SUCCESS:
+      return {
+        ...state,
+        users: payload,
       };
 
 

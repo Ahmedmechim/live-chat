@@ -1,0 +1,11 @@
+.head{
+    height: 52px;
+}
+.messangerBox{
+    width: 100%;
+    height: 620px;
+}
+.discussionBox{
+    height: 515px;
+    overflow: auto;
+}

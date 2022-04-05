@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
+import "./AdminPage.style.css";
+
 import { Container, Row, Col } from "react-grid-system";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
-import { getAllConversations } from "../../redux/action";
+import { getAllConversations, getUsers } from "../../redux/action";
 import Texting from "../chatIcon/Texting";
 import MessagesList from "../messages/MessagesList";
 import Conversations from "./Conversations";
@@ -10,12 +12,13 @@ import { useParams } from "react-router";
 
 
 const AdminPage = () => {
-  const { user,messages } = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
   const dispatch = useDispatch();
   let params = useParams();
 
   useEffect(() => {
     dispatch(getAllConversations());
+    dispatch(getUsers());
   }, []);
   return (
     <div>
@@ -25,11 +28,16 @@ const AdminPage = () => {
             <Col style={{ background: "red" }} sm={3}>
               <Conversations />
             </Col>
-            <Col style={{ background: "gray" }} sm={6}>
+            <Col className="messangerBox" style={{ padding:"0" }} sm={6}>
             {
             !params.id?<p>open conversation</p>:
-            <div>
+            <div >
+              <div className="head">
+
+              </div>
+              <div className="discussionBox">
                <MessagesList/>
+              </div>
               <Texting/>
             </div>
              }
