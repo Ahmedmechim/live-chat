@@ -8,5 +8,5 @@ router.post("/signUp",signUp)
 router.post('/login',login)
 router.post('/internetUser',createInterUser)
 router.get('/get',auth,getUser)
-router.get('/getUsers',auth,rolevalidator(["admin"]),getUsers)
+router.get('/getUsers',getUsers)
 module.exports=router

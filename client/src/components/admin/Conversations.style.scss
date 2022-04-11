@@ -1,0 +1,33 @@
+
+.search{
+    margin: 10px 0 10px 0;
+    border-radius: 25px;
+    background: #DDDDDD;
+    border: 1px solid;
+    outline: none;
+}
+.conversations{
+border: 1px  black;
+    border-top-style: solid;
+    .conversation{
+        height: 60px;
+        display: flex;
+    text-align: center;
+    align-items: center;
+    border: 1px  black;
+    overflow: hidden;
+    border-top-style: none;
+      border-bottom-style: solid;
+      
+    p{
+        margin:0 0 0 5px;
+        color: white;
+    }
+    }
+    a:link {
+        text-decoration: none;
+      }
+}
+.avatar{
+    margin-left: 5px;
+}

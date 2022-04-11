@@ -11,7 +11,7 @@
   resize: none;
   margin-left: 20px;
   border: none;
-  width: 180px;
+  width: 100%;
 }
 .icons {
   display: flex;

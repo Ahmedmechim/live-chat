@@ -99,6 +99,7 @@ export const getAllConversations = (userId) => async (dispatch) => {
       type: GET_ALL_CONVERSATIONS_SUCCESS,
       payload: res.data,
     });
+    dispatch(getUsers());
   } catch (error) {
     dispatch({
       type: GET_ALL_CONVERSATIONS_FAIL,
@@ -138,7 +139,7 @@ export const getDiscussion = (userId) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(getMessages(res.data._id));
-    console.log(res.data);
+    // console.log(res.data);
   } catch (error) {
     dispatch({
       type: GET_CONVERSATION_FAIL,
@@ -209,7 +210,7 @@ export const getUsers = () => async (dispatch) => {
     },
   };
   try {
-    let res = await axios.get(`/user/getUsers`, config);
+    let res = await axios.get(`/user/getUsers`);
     dispatch({
       type: GET_USERS_SUCCESS,
       payload: res.data,

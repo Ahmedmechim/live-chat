@@ -17,18 +17,17 @@ const AdminPage = () => {
   let params = useParams();
 
   useEffect(() => {
-    dispatch(getAllConversations());
-    dispatch(getUsers());
-  }, []);
+
+  }, [user]);
   return (
     <div>
       {user && user.role === "admin" ? (
         <Container style={{ margin: "0", maxWidth: "none" }}>
           <Row>
-            <Col style={{ background: "red" }} sm={3}>
+            <Col style={{ background: "#353D46", padding:"0",height:"625px" }} sm={3}>
               <Conversations />
             </Col>
-            <Col className="messangerBox" style={{ padding:"0" }} sm={6}>
+            <Col className="messangerBox" style={{background: "#F4F8F8", padding:"0",height:"625px" }} sm={6}>
             {
             !params.id?<p>open conversation</p>:
             <div >
@@ -42,7 +41,7 @@ const AdminPage = () => {
             </div>
              }
             </Col>
-            <Col style={{ background: "yellow" }} sm={3}>
+            <Col style={{ background: "yellow",height:"625px" }} sm={3}>
               <div>profil</div>
             </Col>
           </Row>

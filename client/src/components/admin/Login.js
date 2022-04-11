@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
-import { userLogin } from "../../redux/action";
+import { getAllConversations, getUsers, userLogin } from "../../redux/action";
 
 
 
@@ -26,6 +26,7 @@ const Login = () => {
     dispatch(userLogin({ email, password }));
     setEmail("");
     setPassword("");
+    dispatch(getAllConversations());
   };
 
   return (
