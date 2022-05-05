@@ -27,6 +27,12 @@ import {
   GET_USERS,
   GET_USERS_SUCCESS,
   GET_USERS_FAIL,
+  GET_ALL_MESSAGES_FAIL,
+  GET_ALL_MESSAGES,
+  GET_ALL_MESSAGES_SUCCESS,
+  SEE_MESSAGE,
+  SEE_MESSAGE_SUCCESS,
+  SEE_MESSAGE_FAIL,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -39,7 +45,7 @@ export const userLogin = (user) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    console.log(res.data);
+    // console.log(res.data);
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
@@ -158,7 +164,8 @@ export const createConversation = (userId, text) => async (dispatch) => {
       type: CREATE_CONVERSATION_SUCCESS,
       payload: res.data,
     });
-    dispatch(sendMessage(res.data._id, text));
+    console.log(res.data)
+    await dispatch(sendMessage(res.data._id, text));
   } catch (error) {
     dispatch({
       type: CREATE_CONVERSATION_FAIL,
@@ -222,3 +229,47 @@ export const getUsers = () => async (dispatch) => {
     });
   }
 };
+
+
+
+export const getAllmessages = ()=>async(dispatch)=>{
+  dispatch({
+    type: GET_ALL_MESSAGES,
+  });
+  
+  try {
+    let res = await axios.get(`/message/getAllMessages`);
+    dispatch({
+      type: GET_ALL_MESSAGES_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_ALL_MESSAGES_FAIL,
+      payload: error.response.data,
+    });
+  }
+}
+
+
+export const seeMessage = (id)=>async(dispatch)=>{
+  dispatch({
+    type: SEE_MESSAGE,
+  });
+  
+  try {
+    let res = await axios.put(`/message//upMessage/${id}`);
+    dispatch({
+      type: SEE_MESSAGE_SUCCESS,
+      payload: res.data,
+    });
+    dispatch(getMessages(id))
+  } catch (error) {
+    dispatch({
+      type: SEE_MESSAGE_FAIL,
+      payload: error.response.data,
+    });
+  }
+}
+
+

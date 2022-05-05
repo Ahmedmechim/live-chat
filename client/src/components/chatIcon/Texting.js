@@ -29,17 +29,17 @@ const Texting = () => {
   const [text, setText] = useState("");
 
   const socket= useRef();
-
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
     }, []);
 
   const handelSend = (e) => {
-    if (messages){
+    if (messages.length!==0){
       e.preventDefault();
       socket.current.emit("sendMessage", {
         senderId: user._id,
         receiverId,
+        conversationId:user.role==="admin"?params.id:conversation._id,
         text: text,
       });
       dispatch(sendMessage(params.id||conversation._id, { text }));
@@ -47,6 +47,12 @@ const Texting = () => {
     }else{
       e.preventDefault();
       dispatch(createConversation(user._id, { text }));
+      socket.current.emit("sendMessage", {
+        senderId: user._id,
+        receiverId,
+        conversationId:user.role==="admin"?params.id:conversation._id,
+        text: text,
+      });
       setText("");
     }
   };

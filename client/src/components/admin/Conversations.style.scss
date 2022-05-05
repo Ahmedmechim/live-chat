@@ -18,11 +18,18 @@ border: 1px  black;
     overflow: hidden;
     border-top-style: none;
       border-bottom-style: solid;
-      
-    p{
+     
+          p{
         margin:0 0 0 5px;
         color: white;
     }
+      
+    
+    .css-fvc8ir-MuiBadge-badge{
+background: red; 
+color: white;
+// margin: 0 0 0 50px;
+}
     }
     a:link {
         text-decoration: none;
@@ -30,4 +37,7 @@ border: 1px  black;
 }
 .avatar{
     margin-left: 5px;
+}
+#isOpen{
+    background-color: rgb(81, 91, 104);
 }

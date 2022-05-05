@@ -35,3 +35,23 @@ exports.sendMessage=async(req,res)=>{
         console.log(error.message)
     }
 }
+
+// get all messages
+exports.getAllmessages = async (req, res) => {
+    try {
+      let messages = await Message.find();
+      res.send(messages);
+    } catch (error) {
+      res.status(500).json({ errors: error.message });
+    }
+  };
+
+
+exports.updateMessage = async (req,res)=>{
+    try {
+        let editedMessages= await Message.find({ conversationId: req.params.id }).updateMany({isSeen:false},{isSeen:true})
+        res.send(editedMessages);
+    } catch (error) {
+        res.status(500).json({ errors: error.message });
+    }
+}
