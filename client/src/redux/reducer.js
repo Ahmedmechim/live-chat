@@ -53,7 +53,9 @@ const reducer = (state = init, { type, payload }) => {
     case GET_ALL_CONVERSATIONS:
     case GET_USERS:
     case GET_ALL_MESSAGES:
-      return state;
+      return{ ...state,
+      errors:null
+      };
 
     case CONNECT_FAIL:
     case GET_PROFIL_FAIL:

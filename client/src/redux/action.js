@@ -36,7 +36,7 @@ import {
 } from "./actionTypes";
 import axios from "axios";
 
-export const userLogin = (user) => async (dispatch) => {
+export const adminLogin = (user) => async (dispatch) => {
   dispatch({ type: LOGIN });
   try {
     let res = await axios.post("/user/login", user);
@@ -45,6 +45,7 @@ export const userLogin = (user) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+    dispatch(getAllConversations());
     // console.log(res.data);
   } catch (error) {
     dispatch({
@@ -258,12 +259,12 @@ export const seeMessage = (id)=>async(dispatch)=>{
   });
   
   try {
-    let res = await axios.put(`/message//upMessage/${id}`);
+    let res = await axios.put(`/message/upMessage/${id}`);
     dispatch({
       type: SEE_MESSAGE_SUCCESS,
       payload: res.data,
     });
-    dispatch(getMessages(id))
+    // dispatch(getMessages(id))
   } catch (error) {
     dispatch({
       type: SEE_MESSAGE_FAIL,

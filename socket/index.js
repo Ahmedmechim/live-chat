@@ -28,6 +28,18 @@ console.log(users)
     addUser(userId, socket.id);
     io.emit("getUsers", users);
   });
+// send and get conversation
+socket.on("sendConversation", ({ senderId, receiverId, conversationId}) => {
+  const user = getUser(receiverId);
+  console.log("conv id",conversationId)
+  if (user) {
+    io.to(user.socketId).emit("getConversation", {
+      senderId,
+      receiverId,
+      // conversationId,
+    });
+  }
+});
   //send and get message
   socket.on("sendMessage", ({ senderId, receiverId,conversationId, text }) => {
     const user = getUser(receiverId);

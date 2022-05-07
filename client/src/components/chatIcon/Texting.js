@@ -47,6 +47,11 @@ const Texting = () => {
     }else{
       e.preventDefault();
       dispatch(createConversation(user._id, { text }));
+      socket.current.emit("sendConversation", {
+        senderId: user._id,
+        receiverId,
+        conversationId:conversation._id,
+      });
       socket.current.emit("sendMessage", {
         senderId: user._id,
         receiverId,

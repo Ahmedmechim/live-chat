@@ -3,7 +3,7 @@ import "./AdminPage.style.scss";
 import { Container, Row, Col } from "react-grid-system";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
-import {  addMessage, getAllmessages, getProfil, getUsers } from "../../redux/action";
+import {  addMessage, getAllConversations, getAllmessages, getProfil, getUsers } from "../../redux/action";
 import Texting from "../chatIcon/Texting";
 import MessagesList from "../messages/MessagesList";
 import Conversations from "./Conversations";
@@ -17,13 +17,16 @@ const AdminPage = () => {
   const { user, users, allConversations,messages } = useSelector((state) => state);
   const dispatch = useDispatch();
   const socket = useRef();
+  let params = useParams();
   const [arrivalMessage, setArrivalMessage] = useState(null);
 
   useEffect(() => {
     dispatch(getProfil());
     dispatch(getAllmessages());
+  }, [params])
+  useEffect(() => {
+    dispatch(getAllConversations());
   }, [])
-  
   
  
 
@@ -54,7 +57,6 @@ const AdminPage = () => {
     }
   }, [arrivalMessage]);
 
-  let params = useParams();
 useEffect(() => {
   dispatch(getUsers())
 }, [])

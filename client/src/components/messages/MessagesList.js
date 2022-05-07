@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "./Message";
 import {
   addMessage,
-  getAllmessages,
   getDiscussion,
-  getMessages,
   getProfil,
   seeMessage,
 } from "../../redux/action";
@@ -26,13 +24,13 @@ const MessagesList = () => {
       dispatch(getProfil());
       dispatch(getDiscussion(user._id));
     }
-  }, [params]);
+  }, []);
 
   useEffect(() => {
     if (user.role === "admin") {
       dispatch(seeMessage(params.id));
     }
-  }, [params]);
+  }, [params,messages]);
 
   
 
@@ -80,7 +78,7 @@ const MessagesList = () => {
     }
   }, [messages]);
 
-  console.log(Date.parse(messages[messages.length-1].createAt))
+  // console.log(Date.parse(messages[messages.length-1].createAt))
   return (
     <div className="messages">
       {messages ? (
