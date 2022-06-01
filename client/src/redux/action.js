@@ -244,6 +244,7 @@ export const getAllmessages = ()=>async(dispatch)=>{
       type: GET_ALL_MESSAGES_SUCCESS,
       payload: res.data,
     });
+    // console.log(res.data)
   } catch (error) {
     dispatch({
       type: GET_ALL_MESSAGES_FAIL,

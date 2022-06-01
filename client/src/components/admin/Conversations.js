@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar } from "@mui/material";
 import "./Conversations.style.scss";
 import { useSelector } from "react-redux";
@@ -8,9 +8,13 @@ import Badge from "@mui/material/Badge";
 const Conversations = () => {
   const { user, allConversations, users, messages } = useSelector(
     (state) => state
-  );
+    );
+
 
   let params = useParams();
+
+  const [search, setSearch] = useState('')
+
 
   // get the number of messages not seen in one discision
   const getNumber = (convId) => {
@@ -20,10 +24,13 @@ const Conversations = () => {
       .filter((msj) => msj.isSeen === false);
     return number;
   };
-console.log(allConversations.map((conv)=>(messages.filter(msj=>msj.conversationId==conv._id))).map(e=>e[e.length-1]))
+  // const sortedActivities = allConversations.sort((a, b) => b.date - a.date)
+
+  console.log(allConversations.map((conv)=>(users.find((user) => user._id == conv.members[1]).email)).filter(e=>e.toLowerCase().includes(search.toLowerCase())))
+  
   return (
     <div>
-      <input className="search" type="text" placeholder="    recherche"></input>
+      <input className="search" type="text" value={search} onChange={e=>setSearch(e.target.value)} placeholder="    recherche"></input>
       <div className="conversations">
         {allConversations.map((conv, i) => (
           <Link to={`/${conv._id}`} key={i}>

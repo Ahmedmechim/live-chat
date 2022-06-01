@@ -1,9 +1,15 @@
-import React, { useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./AdminPage.style.scss";
 import { Container, Row, Col } from "react-grid-system";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router";
-import {  addMessage, getAllConversations, getAllmessages, getProfil, getUsers } from "../../redux/action";
+import {
+  addMessage,
+  getAllConversations,
+  getAllmessages,
+  getProfil,
+  getUsers,
+} from "../../redux/action";
 import Texting from "../chatIcon/Texting";
 import MessagesList from "../messages/MessagesList";
 import Conversations from "./Conversations";
@@ -12,9 +18,10 @@ import { Avatar } from "@mui/material";
 import { io } from "socket.io-client";
 import { notifyMe } from "../../data";
 
-
 const AdminPage = () => {
-  const { user, users, allConversations,messages } = useSelector((state) => state);
+  const { user, users, allConversations, messages, isAuth } = useSelector(
+    (state) => state
+  );
   const dispatch = useDispatch();
   const socket = useRef();
   let params = useParams();
@@ -23,33 +30,34 @@ const AdminPage = () => {
   useEffect(() => {
     dispatch(getProfil());
     dispatch(getAllmessages());
-  }, [params])
+  }, [params]);
   useEffect(() => {
     dispatch(getAllConversations());
-  }, [])
-  
- 
+  }, []);
 
   useEffect(() => {
-      socket.current = io("ws://localhost:8900");
-      socket.current.on("getMessage", (data) => {
-        console.log("data", data);
-        notifyMe(data.text);
-        setArrivalMessage({
-          senderId: data.senderId,
-          text: data.text,
-          conversationId: data.conversationId,
-          isSeen: false,
-        });
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      console.log("data", data);
+      notifyMe(data.text);
+      dispatch(getAllConversations());
+      setArrivalMessage({
+        senderId: data.senderId,
+        text: data.text,
+        conversationId: data.conversationId,
+        isSeen: false,
       });
+    });
   }, [messages]);
 
   useEffect(() => {
-    socket.current.emit("addUser", user._id);
-    socket.current.on("getUsers", (users) => {
-      console.log("users", users);
-    });
-  }, [ user]);
+    if (user) {
+      socket.current.emit("addUser", user._id);
+      socket.current.on("getUsers", (users) => {
+        console.log("users", users);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (arrivalMessage) {
@@ -57,45 +65,48 @@ const AdminPage = () => {
     }
   }, [arrivalMessage]);
 
-useEffect(() => {
-  dispatch(getUsers())
-}, [])
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
 
-
-  let x =""
-  let recived =""
-  if(params.id){
-    x=allConversations
-    .find((conversation) => conversation._id === params.id)
-    .members.find((member) => member !== user._id);
+  let x = "";
+  let recived = "";
+  if (params.id) {
+    x = allConversations
+      .find((conversation) => conversation._id === params.id)
+      .members.find((member) => member !== user._id);
     recived = users.find((user) => user._id === x).email;
-  } 
+  }
   return (
     <div>
-      {user && user.role === "admin" ? (
+      {user && isAuth ? (
         <Container style={{ margin: "0", maxWidth: "none" }}>
           <Row>
             <Col
               style={{ background: "#353D46", padding: "0", height: "100vh" }}
-              md={3} sm={4} xs={3}
+              md={3}
+              sm={4}
+              xs={3}
             >
               <Conversations />
             </Col>
             <Col
               className="messangerBox"
               style={{ background: "#F4F8F8", padding: "0", height: "100vh" }}
-              md={6} sm={8} xs={9}
+              md={6}
+              sm={8}
+              xs={9}
             >
               {!params.id ? (
                 <p>open conversation</p>
               ) : (
                 <div>
                   <div className="head">
-                      <Avatar className="avatar">
-                        {recived.charAt(0).toUpperCase()}
-                      </Avatar>
-                      <p style={{ margin:"0" }}>{recived}</p>
-                    </div>
+                    <Avatar className="avatar">
+                      {recived.charAt(0).toUpperCase()}
+                    </Avatar>
+                    <p style={{ margin: "0" }}>{recived}</p>
+                  </div>
                   <div className="discussionBox">
                     <MessagesList />
                   </div>
@@ -103,7 +114,11 @@ useEffect(() => {
                 </div>
               )}
             </Col>
-            <Col className="profil" style={{ background: "yellow", height: "100vh" }} md={3}>
+            <Col
+              className="profil"
+              style={{ background: "yellow", height: "100vh" }}
+              md={3}
+            >
               <div>profil</div>
             </Col>
           </Row>

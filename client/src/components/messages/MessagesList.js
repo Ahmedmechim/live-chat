@@ -13,7 +13,7 @@ import { useParams } from "react-router";
 import { notifyMe } from "../../data";
 
 const MessagesList = () => {
-  const { user, messages } = useSelector((state) => state);
+  const { user, messages,conversation } = useSelector((state) => state);
   const dispatch = useDispatch();
   let params = useParams();
   const socket = useRef();
@@ -24,7 +24,7 @@ const MessagesList = () => {
       dispatch(getProfil());
       dispatch(getDiscussion(user._id));
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (user.role === "admin") {
