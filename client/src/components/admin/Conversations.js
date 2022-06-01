@@ -26,7 +26,7 @@ const Conversations = () => {
   };
   // const sortedActivities = allConversations.sort((a, b) => b.date - a.date)
 
-  console.log(allConversations.map((conv)=>(users.find((user) => user._id == conv.members[1]).email)).filter(e=>e.toLowerCase().includes(search.toLowerCase())))
+  // console.log(allConversations.map((conv)=>(users.find((user) => user._id == conv.members[1]).email)).filter(e=>e.toLowerCase().includes(search.toLowerCase())))
   
   return (
     <div>
