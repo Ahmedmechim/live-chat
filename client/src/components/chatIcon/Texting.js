@@ -30,7 +30,7 @@ const Texting = () => {
 
   const socket = useRef();
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io();
   }, []);
 
   const handelSend = (e) => {
