@@ -30,7 +30,7 @@ const Texting = () => {
 
   const socket = useRef();
   useEffect(() => {
-    socket.current = io();
+    socket.current = io("https://live-chaat.herokuapp.com");
   }, []);
 
   const handelSend = (e) => {
