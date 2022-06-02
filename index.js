@@ -22,10 +22,17 @@ app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
   });
 
+
+  const server= app.listen(PORT,(err)=>
+  err?console.log(err):console.log("server is started")) 
  
-  const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-  
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
   let users = [];
   
   const addUser = (userId, socketId) => {
@@ -86,5 +93,3 @@ const io = require('socket.io')(server);
   
 
 
-app.listen(PORT,(err)=>
-err?console.log(err):console.log("server is started"))

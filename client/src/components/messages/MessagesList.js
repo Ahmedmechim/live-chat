@@ -36,7 +36,7 @@ const MessagesList = () => {
 
   useEffect(() => {
     if (user.role !== "admin") {
-      socket.current = io("live-chaat.herokuapp.com");
+      socket.current = io("https://live-chaat.herokuapp.com");
       socket.current.on("getMessage", (data) => {
         console.log("data", data);
         notifyMe(data.text);
