@@ -18,7 +18,6 @@ app.use('/message', message)
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 app.get("*", (req, res) => {
-    console.log("reached");
     res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
   });
 

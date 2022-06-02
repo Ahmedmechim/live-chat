@@ -36,7 +36,7 @@ const AdminPage = () => {
   }, []);
 
   useEffect(() => {
-    socket.current = io("https://live-chaat.herokuapp.com");
+    socket.current = io();
     socket.current.on("getMessage", (data) => {
       console.log("data", data);
       notifyMe(data.text);
