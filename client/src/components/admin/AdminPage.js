@@ -36,7 +36,7 @@ const AdminPage = () => {
   }, []);
 
   useEffect(() => {
-    socket.current = io();
+    socket.current = io("ws://localhost:8900");
     socket.current.on("getMessage", (data) => {
       console.log("data", data);
       notifyMe(data.text);
